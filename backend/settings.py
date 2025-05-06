@@ -36,10 +36,12 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',  # Vite default port
-    config('FRONTEND_URL', default=''),
-]
+CORS_ALLOWED_ORIGINS = []
+frontend_url = config('FRONTEND_URL', default='')
+if frontend_url and frontend_url.startswith(('http://', 'https://')):
+    CORS_ALLOWED_ORIGINS.append(frontend_url)
+else:
+    CORS_ALLOWED_ORIGINS.append('http://localhost:5173')  # Fallback for local dev
 
 ROOT_URLCONF = 'urls'
 
@@ -81,7 +83,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = []
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
