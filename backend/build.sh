@@ -11,4 +11,4 @@ echo "Applying migrations..."
 python manage.py migrate || { echo "migrate failed"; exit 1; }
 
 echo "Creating superuser..."
-python manage.py createsu || { echo "createsu failed"; exit 1; }
+python manage.py createsu || { echo "createsu failed, continuing..."; }
