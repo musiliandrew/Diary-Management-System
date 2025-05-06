@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import ProductCard from '../components/ProductCard'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    axios.get('/api/products/')
+    axios.get(`${API_URL}/api/products/`)
       .then((response) => {
         console.log('Full API Response:', response)
         console.log('Response Data:', response.data)
@@ -73,7 +75,7 @@ function Home() {
             <a href="#" className="hover:text-amber-300">Contact</a>
             <a href="#" className="hover:text-amber-300">Terms</a>
           </div>
-          <p className="mt-4 text-sm">&copy; 2025 African Art Creations. All rights reserved.</p>
+          <p className="mt-4 text-sm">© 2025 African Art Creations. All rights reserved.</p>
         </div>
       </footer>
     </div>

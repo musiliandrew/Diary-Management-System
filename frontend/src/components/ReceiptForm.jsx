@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 function ReceiptForm({ product, deliveryLocations, onSubmit }) {
   const [mpesaName, setMpesaName] = useState('')
   const [mpesaCode, setMpesaCode] = useState('')
